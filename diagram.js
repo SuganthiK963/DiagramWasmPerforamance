@@ -350,6 +350,9 @@ window.wordWrapping = function (text, textValue, laneWidth) {
     var i = 0;
     var wrap = text.whiteSpace !== 'nowrap' ? true : false;
     var content = textValue || text.content;
+    if (content == undefined) {
+        content = "";
+    }
     var eachLine = content.split('\n');
     var txt;
     var words;
@@ -566,10 +569,6 @@ function invokeDiagramEvents(e, component) {
             args.eventInvokeValue = ++window.eventInvokeValue;
         }
         if (e.type != "scroll" || (e.type == "scroll" && !isMouseWheel)) {
-            if (e.type == "mousemove") {
-                var t0 = Date.now();
-                console.log("JS:"+t0);
-            }
             component.invokeMethodAsync('InvokeDiagramEvents', args);
         }
     }
@@ -641,7 +640,4 @@ window.updateInnerLayerSize = function (layerList, width, height, element, left,
         isMouseWheel = false;
     }
    return onChangeScrollValues(element, left, top, eventValue);
-}
-window.onConsoleLog = function (val) {
-    console.log(val);
 }
